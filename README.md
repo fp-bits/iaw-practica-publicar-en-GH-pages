@@ -1,17 +1,17 @@
 ![Github Pages](https://cdn-wcsm.alura.com.br/2025/04/imagen4.png "Github Pages")
 
-# Práctica-Examen de nuestro primer despliegue en la Web
+# PrácticaX2 de nuestro primer despliegue en la Web
 ## Publicar tu sitio Hugo con GitHub Pages
 
 **Módulo:** Implantación de Aplicaciones Web (IAW) — 2º ASIR
 **Previas requeridas:** [P1.1 — Tu perfil de GitHub](https://librebits.info/2asir/iaw/perfil-github-readme-html-css/) y [P1.2 — Tu mini sitio web de la mano de Hugo](https://librebits.info/2asir/iaw/mini-sitio-web-con-hugo/)
 
-Comienza el examen práctico del módulo. El reto consiste en **publicar en Internet, a través de [GitHub Pages](https://docs.github.com/es/pages), el mini sitio Hugo que construiste en P1.2**. Esta práctica-examen la puedes empezar desde ahora mismo, si quieres. De este modo el día señalado bastará con depurarla.
+Comienza la primera prácticaX2 del módulo. El reto consiste en **publicar en Internet, a través de [GitHub Pages](https://docs.github.com/es/pages), el mini sitio Hugo que construiste en P1.2**. Esta prácticaX2 la puedes empezar desde ahora mismo, si quieres. De este modo el día señalado bastará con depurarla.
 
-El día del examen práctico te propondré una serie de mejoras y cambios en ese mismo proyecto, que deberás implementar durante el tiempo establecido.
+El día de la 'defensa' de la prácticaX2 te propondré una serie de mejoras y cambios en ese mismo proyecto, que deberás implementar durante el tiempo establecido.
 
-*Fecha* de la práctica-examen: **jueves 5 de noviembre de 2026**  
-*Hora* de la práctica-examen: **20:00**
+*Fecha* de la prácticaX2: **jueves 5 de noviembre de 2026**  
+*Hora* de la prácticaX2: **20:00**
 
 > 💡 **Idea clave:** Hugo es un *generador de sitios estáticos*. Tú escribes **fuente** (`content/`, `layouts/`, `hugo.toml`…) y Hugo **genera HTML plano**. GitHub Pages solo sirve ese HTML plano. Todo el flujo de la práctica es: *editar → construir → commit → push → comprobar*.
 
