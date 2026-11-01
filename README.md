@@ -10,8 +10,8 @@ Comienza el examen práctico del módulo. El reto consiste en **publicar en Inte
 
 El día del examen práctico te propondré una serie de mejoras y cambios en ese mismo proyecto, que deberás implementar durante el tiempo establecido.
 
-*Fecha* de la práctica-examen: **[A CONFIRMAR POR EL PROFESOR]**
-*Hora* de la práctica-examen: **[A CONFIRMAR POR EL PROFESOR]**
+*Fecha* de la práctica-examen: **jueves 5 de noviembre de 2026**  
+*Hora* de la práctica-examen: **20:00**
 
 > 💡 **Idea clave:** Hugo es un *generador de sitios estáticos*. Tú escribes **fuente** (`content/`, `layouts/`, `hugo.toml`…) y Hugo **genera HTML plano**. GitHub Pages solo sirve ese HTML plano. Todo el flujo de la práctica es: *editar → construir → commit → push → comprobar*.
 
