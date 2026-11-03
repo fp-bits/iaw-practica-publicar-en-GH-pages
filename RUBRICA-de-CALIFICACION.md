@@ -1,4 +1,4 @@
-# RUBRICA DE CALIFICACIÓN — Práctica-Examen: publicar tu sitio Hugo en GitHub Pages
+# RUBRICA DE CALIFICACIÓN — PrácticaX2:  publicar tu sitio Hugo en GitHub Pages
 
 **Módulo:** Implantación de Aplicaciones Web (IAW) — 2º ASIR
 **Enunciado:** [README.md](README.md) · **Previas:** P1.1 (perfil GitHub), P1.2 (mini sitio Hugo)
@@ -30,7 +30,7 @@
 
 | **Criterio** | **Peso** | **Qué se valora** |
 |:---|:---:|:---|
-| **Cambios del día del examen** | 1p | Las mejoras propuestas se implementan, se reconstruyen (`hugo`), se suben y se ven en la URL pública |
+| **Cambios del día de la realización de la Prácticax2** | 1p | Las mejoras propuestas se implementan, se reconstruyen (`hugo`), se suben y se ven en la URL pública |
 | **Identidad visual y calidad del contenido** | 1p | Cuidado visual ("ponlo bonico") y texto propio y específico, no placeholder |
 | **Entregable completo y verificable** | 1p | URL pública + URL del repo + captura de Settings → Pages; todo comprobable |
 
@@ -45,12 +45,12 @@ Esta práctica se entrega vía repositorio GitHub, así que se añade una compro
 
 ## Escala orientativa
 
-- **Excelente (9-10):** sitio Hugo publicado y accesible, configuración correcta, cambios del examen hechos, cuidado visual, demo en vivo y/o `git log` con evidencia real.
+- **Excelente (9-10):** sitio Hugo publicado y accesible, configuración correcta, cambios de la Prácticax2 hechos, cuidado visual, demo en vivo y/o `git log` con evidencia real.
 - **Notable (7-8.9):** todo funciona, con algún detalle menor (un enlace o estilo roto, contenido escueto, o topado por ser solo-online sin `git log`).
 - **Suficiente (5-6.9):** el repo está subido pero la web publicada tiene fallos importantes (sin estilos, falta blog o parcial, `docs/` desactualizado).
 - **Insuficiente (<5):** no hay URL pública funcional (404, Pages mal configurado, `docs/` ausente) o el sitio no es el de Hugo.
 
-## Lista de comprobación rápida para el profesor
+## Lista de comprobación rápida (para nosotros, el profesorado :-)
 
 ```bash
 git clone https://github.com/<alumno>/<repo>.git && cd <repo>
@@ -63,7 +63,9 @@ curl -sI https://<alumno>.github.io/<repo>/ | head -1   # HTTP/2 200
 
 Errores frecuentes: Pages en `/ (root)`, `baseURL` sin la subruta del repo, `draft: true`, olvidar `hugo` antes del `push`, texto de prueba en la portada.
 
-## Plantilla de feedback
+## Plantilla de feedback (para el estudiante)
+
+Más allá de una calificación numérica, ¿que puedes esperar por nuestra parte a modo de realimentación/crítica-constructiva? Pues algo así...
 
 ```
 ## Feedback
