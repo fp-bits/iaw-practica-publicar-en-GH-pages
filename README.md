@@ -6,7 +6,7 @@
 **Módulo:** Implantación de Aplicaciones Web (IAW) — 2º ASIR
 **Previas requeridas:** [P1.1 — Tu perfil de GitHub](https://librebits.info/2asir/iaw/perfil-github-readme-html-css/) y [P1.2 — Tu mini sitio web de la mano de Hugo](https://librebits.info/2asir/iaw/mini-sitio-web-con-hugo/)
 
-Comienza la primera prácticaX2 del módulo. El reto consiste en **publicar en Internet, a través de [GitHub Pages](https://html.github.com/es/pages), el mini sitio Hugo que construiste en P1.2**. Esta prácticaX2 la puedes empezar desde ahora mismo, si quieres. De este modo el día señalado bastará con depurarla.
+Comienza la primera prácticaX2 del módulo. El reto consiste en **publicar en Internet, a través de [GitHub Pages](https://docs.github.com/es/pages), el mini sitio Hugo que construiste en P1.2**. Esta prácticaX2 la puedes empezar desde ahora mismo, si quieres. De este modo el día señalado bastará con depurarla.
 
 El día de la 'defensa' de la prácticaX2 te propondré una serie de mejoras y cambios en ese mismo proyecto, que deberás implementar durante el tiempo establecido.
 
@@ -44,16 +44,16 @@ El día de la 'defensa' de la prácticaX2 te propondré una serie de mejoras y c
  hugo server -D      ← probar en local (http://localhost:1313/)
         │
         ▼
- hugo                ← construir: genera html/ (HTML plano, sin borradores)
+ hugo                ← construir: genera el sitio en la raíz del repo (HTML plano, sin borradores)
         │
         ▼
  git add . && git commit && git push
         │
         ▼
- GitHub Pages sirve main:/html  →  https://TU-USUARIO.github.io/TU-REPO/
+ GitHub Pages sirve main:/ (root)  →  https://TU-USUARIO.github.io/TU-REPO/
 ```
 
-Regla de oro: **lo que ves en `hugo server -D` no es lo que se publica**; se publica lo que hay en `html/` *después* de ejecutar `hugo` y hacer `push`.
+Regla de oro: **lo que ves en `hugo server -D` no es lo que se publica**; se publica lo que hay en la raíz del repo *después* de ejecutar `hugo` y hacer `push`.
 
 ### 1. Punto de partida: tu sitio Hugo de P1.2
 
@@ -83,19 +83,22 @@ Regla de oro: **lo que ves en `hugo server -D` no es lo que se publica**; se pub
 
 ### 3. Configura Hugo para GitHub Pages
 
-GitHub Pages sirve tu sitio bajo una subruta (`/TU-REPO/`) y, con el modo «Deploy from a branch», solo puede servir la raíz del repo o la carpeta `/html`. Hay que decírselo a Hugo en `hugo.toml`:
+GitHub Pages sirve tu sitio bajo una subruta (`/TU-REPO/`) y, con el modo «Deploy from a branch», solo puede servir la **raíz del repo** (`/`) o la carpeta `/docs`. Para no complicarnos con una carpeta extra, vamos a lo más KISS: que Hugo genere el sitio **directamente en la raíz** del repo. Dícelo en `hugo.toml`:
 
 ```toml
 baseURL = "https://TU-USUARIO.github.io/mini-sitio-hugo/"
 languageCode = "es"
 title = "Mi sitio web práctico"
-publishDir = "html"          # Hugo escribe aquí el HTML generado
+publishDir = "."             # Hugo escribe el HTML generado directamente en la raíz del repo
+disableKinds = ["taxonomy", "term"]   # evita que Hugo llene la raíz de carpetas categories/ y tags/ que no necesitas
 ```
 
-Además, crea un fichero vacío para que GitHub **no** procese tu `html/` con Jekyll (sirve el HTML tal cual):
+Esto mezclará, en la raíz de tu repo, tus ficheros fuente (`content/`, `layouts/`, `hugo.toml`…) con el HTML generado (`index.html`, `sitemap.xml`…). Es buscado: así GitHub Pages puede servir directamente desde `/ (root)` sin nada más que configurar.
+
+Además, crea un fichero vacío para que GitHub **no** procese tu sitio con Jekyll (sirve el HTML tal cual):
 
 ```bash
-mkdir -p static && touch static/.nojekyll      # Hugo lo copiará a html/.nojekyll
+mkdir -p static && touch static/.nojekyll      # Hugo lo copiará a la raíz como .nojekyll
 ```
 
 > ⚠️ **Enlaces y CSS bajo subruta:** no escribas rutas absolutas a mano como `href="/css/estilo.css"` en tus plantillas (apuntarían a `tuusuario.github.io/css/…`, no a tu repo). Usa las funciones de Hugo: `{{ "css/estilo.css" | relURL }}` o `{{ .Site.Home.RelPermalink }}`. Ver [relURL](https://gohugo.io/functions/urls/relurl/).
@@ -103,13 +106,14 @@ mkdir -p static && touch static/.nojekyll      # Hugo lo copiará a html/.nojeky
 ### 4. Construye el sitio
 
 ```bash
-hugo                 # genera html/ a partir de tu código fuente
-ls html              # debe haber index.html, .nojekyll, tu blog, etc.
+hugo                 # genera el sitio en la raíz, a partir de tu código fuente
+ls                   # debe haber index.html, .nojekyll, tu blog, etc., junto a content/ y layouts/
 ```
 
 - `hugo server -D` **incluye** los borradores (`draft: true`); `hugo` **no**. Si una página tuya tiene `draft: true`, no aparecerá en el sitio publicado: cámbiala a `draft: false` antes de construir.
-- Si cambias o borras contenido, usa `hugo --cleanDestinationDir` para eliminar de `html/` ficheros que ya no existen.
-- Puedes abrir `html/index.html` en el navegador como comprobación rápida, pero la prueba real es la URL de GitHub Pages (paso 7).
+- Puedes abrir `index.html` en el navegador como comprobación rápida, pero la prueba real es la URL de GitHub Pages (paso 7).
+
+> 🚨 **No ejecutes `hugo --cleanDestinationDir` con esta configuración.** Esa opción borra, dentro de `publishDir`, todo lo que Hugo no reconozca como parte del build actual — y como aquí `publishDir` **es la raíz de tu repo**, eso incluye `content/`, `layouts/`, `static/` e incluso tu propio `hugo.toml`. Lo hemos comprobado: borra el proyecto entero. Si algún día cambias o borras contenido y te quedan ficheros HTML viejos sueltos, bórralos a mano con `rm`.
 
 ### 5. Haz un commit y sube los cambios
 
@@ -118,7 +122,7 @@ El HTML generado **forma parte del repositorio** (es lo que GitHub va a servir).
 ```bash
 git status
 git add .
-git commit -m "Configurado baseURL y generado html/ para GitHub Pages"
+git commit -m "Configurado baseURL y generado el sitio en la raíz para GitHub Pages"
 git push
 ```
 
@@ -127,7 +131,7 @@ git push
 - Ve a la pestaña **Settings** de tu repositorio (`TU-USUARIO/mini-sitio-hugo`).
 - En el menú lateral, busca la sección **Pages**.
 - En **Build and deployment → Source**, selecciona **Deploy from a branch**.
-- En **Branch** elige `main` y la carpeta **`/html`** (no `/ (root)`).
+- En **Branch** elige `main` y **`/ (root)`**.
 - Pulsa **Save**.
 
 ### 7. Visualiza tu web
@@ -144,9 +148,9 @@ Con Hugo la configuración vive en `hugo.toml` (el equivalente al `_config.yml` 
 
 ```toml
 title = "Mi sitio web práctico"
+description = "Ejercicio de publicación con Hugo y GitHub Pages"
 
-[params]
-  description = "Ejercicio de publicación con Hugo y GitHub Pages"
+publishDir = "."
 ```
 
 Y úsalo en tu plantilla/parcial de cabecera:
@@ -156,24 +160,24 @@ Y úsalo en tu plantilla/parcial de cabecera:
 <meta name="description" content="{{ .Site.Params.description }}">
 ```
 
-Haz `hugo`, commit y push de los cambios (código fuente **y** `html/`).
+Haz `hugo`, commit y push de los cambios (código fuente **y** el HTML generado en la raíz).
 
 ### Problemas típicos
 
 | Síntoma | Causa probable | Solución |
 |:---|:---|:---|
-| 404 en la URL de Pages | Pages apunta a `/ (root)` en vez de `/html`, o `html/` no está subido | Revisa paso 6; `git ls-files html \| head` |
+| 404 en la URL de Pages | Pages no está configurado en `/ (root)`, o el `index.html` generado no está subido | Revisa paso 6; `git ls-files index.html` |
 | La web sale sin estilos | `baseURL` incorrecto o rutas absolutas `/css/…` | Revisa `baseURL` y usa `relURL` (paso 3) |
 | Falta una página o una entrada del blog | `draft: true` | Ponlo a `false` y vuelve a ejecutar `hugo` |
 | Cambio visible en local pero no en la web | Olvidaste `hugo` + `git push` | Repite pasos 4 y 5 |
 | La portada muestra «Hola mundo» | Texto de prueba en `layouts/index.html` o `home.html` | Sustitúyelo por tu contenido (ver P1.2) |
-| Ves tu `README.md` en vez de la web | Pages sirve `/ (root)` sin `index.html` | Cambia a `/html` |
+| Ves tu `README.md` en vez de la web | Falta `index.html` generado en la raíz, o no se subió | Ejecuta `hugo` y vuelve a hacer `push` (pasos 4 y 5) |
 
 ### Entregable
 
 1. URL pública de tu sitio en GitHub Pages (`https://TU-USUARIO.github.io/…`).
-2. URL de tu repositorio GitHub (con `html/` y el código fuente Hugo).
-3. Captura de **Settings → Pages** mostrando `main` + `/html` y el sitio publicado.
+2. URL de tu repositorio GitHub (con el código fuente Hugo y el HTML generado, ambos en la raíz).
+3. Captura de **Settings → Pages** mostrando `main` + `/ (root)` y el sitio publicado.
 
 Entrega escribiendo un e-mail al profesor (jordi.lopezamat [en] educa.madrid.org , adjuntando los entregables ) o vía [servidor sFTP](https://librebits.info/blog/2asir-conexion-sftp-como-subir-tus-entregas/)).
 
@@ -189,7 +193,7 @@ Consulta la [RÚBRICA DE CALIFICACIÓN](RUBRICA-de-CALIFICACION.md) para saber q
 - [Hugo — Configuración (`baseURL`, `publishDir`)](https://gohugo.io/configuration/all/)
 - [Hugo — `relURL`](https://gohugo.io/functions/urls/relurl/)
 - [Hugo Codex — Empezando (español)](https://hugocodex.org/es/empezando/)
-- [Guía oficial de GitHub Pages (español)](https://html.github.com/es/pages)
+- [Guía oficial de GitHub Pages (español)](https://docs.github.com/es/pages)
 - [Configurar una fuente de publicación para GitHub Pages](https://docs.github.com/es/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
 - [Paso a Paso para activar tu proyecto en GitHub Pages — Alura Latam](https://www.aluracursos.com/blog/github-pages)
 
