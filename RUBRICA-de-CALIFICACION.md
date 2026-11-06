@@ -43,6 +43,11 @@ Esta práctica se entrega vía repositorio GitHub, así que se añade una compro
 - **Intermedio (hasta 9/10)** — sin demo en vivo, pero con `git log` que sí muestra esa evidencia (trabajo desde terminal, "a lo Pro").
 - **Tope 8/10** — sin demo en vivo y sin evidencia en `git log` (un único commit, mensajes genéricos o timestamps idénticos; típico de arrastrar ficheros desde la web de GitHub).
 
+## Penalización por entrega tardía
+
+**Fecha límite: viernes 6/11/2026 a las 20:00.** A partir de ahí, -0.5 puntos por cada día natural de
+retraso hasta la fecha real de entrega (fichero en sFTP o último commit relevante en GitHub).
+
 ## Escala orientativa
 
 - **Excelente (9-10):** sitio Hugo publicado y accesible, configuración correcta, cambios de la Prácticax2 hechos, cuidado visual, demo en vivo y/o `git log` con evidencia real.
